@@ -635,9 +635,6 @@
 
     /* DETAIL */
     .detail-back-bar { padding: 0 5%; height: 48px; }
-    .detail-back-btn { font-size: 12px; }
-    .detail-nav-btn { font-size: 10px; padding: 5px 10px; }
-    .detail-hero { height: 280px; }
     .detail-body { grid-template-columns: 1fr; gap: 28px; padding: 28px 5% 60px; }
     .detail-category { font-size: 10px; }
     .detail-title { font-size: clamp(22px, 6vw, 34px); }
@@ -649,7 +646,7 @@
     .result-num { font-size: 20px; }
     .result-label { font-size: 10px; }
     .detail-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    #detail-gallery-wrap { padding: 0 5% 60px; }
+    #detail-gallery-wrap { padding: 20px 5% 0; }
 
     /* LIGHTBOX */
     .lb-btn { width: 40px; height: 40px; font-size: 20px; }
@@ -713,21 +710,13 @@
   .detail-nav-btn:hover { border-color: var(--text); color: var(--text); }
   .detail-nav-btn:disabled { opacity: 0.3; pointer-events: none; }
 
-  .detail-hero {
-    width: 100%;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f5f3f0;
-    overflow: hidden;
-  }
+  /* Gallery */
 
   .detail-body {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 60px;
-    padding: 60px 8% 100px;
+    padding: 48px 8% 100px;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -1118,7 +1107,10 @@
     </div>
   </div>
 
-  <div class="detail-hero" id="detail-hero"></div>
+  <!-- Gallery — 설명보다 먼저 노출 -->
+  <div id="detail-gallery-wrap" style="display:none; padding: 32px 8% 0; max-width:1200px; margin:0 auto;">
+    <div id="detail-gallery" class="detail-gallery"></div>
+  </div>
 
   <div class="detail-body">
     <div class="detail-main">
@@ -1167,12 +1159,6 @@
         <div class="detail-tags" id="detail-tags"></div>
       </div>
     </div>
-  </div>
-
-  <!-- Gallery -->
-  <div id="detail-gallery-wrap" style="display:none; padding: 0 8% 80px; max-width:1200px; margin:0 auto;">
-    <h3 class="detail-section-title" style="margin-bottom:20px">작업 이미지</h3>
-    <div id="detail-gallery" class="detail-gallery"></div>
   </div>
 
   <!-- Lightbox -->
@@ -1417,14 +1403,6 @@ window.filterWork = filterWork;
 // hero 배경: gallery 없으면 thumbBg, 있으면 첫 이미지
 function renderDetail(idx) {
   const p = PROJECTS[idx];
-  const heroEl = document.getElementById('detail-hero');
-  if (p.gallery && p.gallery.length > 0) {
-    heroEl.style.background = '#f5f3f0';
-    heroEl.innerHTML = `<img src="${p.gallery[0]}" style="height:100%;max-width:100%;object-fit:contain;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,0.1);">`;
-  } else {
-    heroEl.style.background = p.thumbBg || '#f5f3f0';
-    heroEl.innerHTML = p.thumbSvg ? `<div style="transform:scale(2.5)">${p.thumbSvg}</div>` : '';
-  }
   document.getElementById('detail-category').textContent = p.cat;
   document.getElementById('detail-title').innerHTML = p.title.replace('\n', '<br>');
   document.getElementById('detail-desc').textContent = p.desc;
