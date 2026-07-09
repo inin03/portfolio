@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portfolio — Web Designer & E-Commerce MD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #faf9f7;
+    --text: #1a1a1a;
+    --muted: #888;
+    --accent: #c8a882;
+    --accent2: #a8c4b8;
+    --border: rgba(0,0,0,0.08);
+    --card-bg: #fff;
+    --nav-bg: rgba(250,249,247,0.88);
+    --font-serif: 'Outfit', sans-serif;
+    --font-sans: 'Noto Sans KR', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a.active,
+  .nav-links a:hover { color: var(--text); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* =================== HOME =================== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 5% 80px 8%;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(40px, 5vw, 66px);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .hero-title .line2 {
+    color: var(--accent);
+    font-weight: 300;
+    font-style: normal;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 380px;
+    margin-bottom: 52px;
+    font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--text);
+    color: #fff;
+    border: 2px solid var(--text);
+    padding: 14px 32px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+  .btn-primary:hover { background: transparent; color: var(--text); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--text);
+    padding: 14px 32px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+  .btn-secondary:hover { background: var(--text); color: #fff; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0ebe3 0%, #e8f0ec 50%, #f5ede6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-graphic {
+    position: relative;
+    width: 340px;
+    height: 420px;
+  }
+
+  .hero-graphic .card-float {
+    position: absolute;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+  .card-float.c1 { top: 0; left: 0; width: 200px; }
+  .card-float.c2 { bottom: 60px; right: 0; width: 170px; }
+  .card-float.c3 { bottom: 0; left: 20px; width: 140px; background: var(--text); color: #fff; }
+
+  .card-float-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .card-float.c3 .card-float-label { color: rgba(255,255,255,0.5); }
+
+  .card-float-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .card-float.c3 .card-float-value { color: #fff; font-size: 22px; }
+
+  .card-float-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .card-float.c3 .card-float-desc { color: rgba(255,255,255,0.6); }
+
+  .dot-bar {
+    display: flex; gap: 5px; margin-top: 12px;
+  }
+  .dot { width: 28px; height: 5px; border-radius: 3px; background: #eee; }
+  .dot.active { background: var(--accent); }
+
+  .stats-row {
+    display: flex;
+    gap: 48px;
+    padding: 40px 8%;
+    border-top: 1px solid var(--border);
+    background: var(--card-bg);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* =================== PORTFOLIO =================== */
+  .page-header {
+    padding: 120px 8% 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 16px;
+    max-width: 500px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    padding: 28px 8%;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 20px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+    border-radius: 0;
+  }
+  .filter-btn.active,
+  .filter-btn:hover {
+    border-color: var(--text);
+    background: var(--text);
+    color: #fff;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 0 8% 80px;
+    border: 1px solid var(--border);
+  }
+
+  .portfolio-item {
+    background: var(--card-bg);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .portfolio-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .portfolio-item:hover .portfolio-thumb img {
+    transform: scale(1.05);
+  }
+
+  .portfolio-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,26,0);
+    transition: background 0.3s;
+  }
+  .portfolio-item:hover .portfolio-thumb::after {
+    background: rgba(26,26,26,0.15);
+  }
+
+  .p1 { background: linear-gradient(135deg, #f0e6d3, #e8ddd0); }
+  .p2 { background: linear-gradient(135deg, #d3e8e0, #c8e0d8); }
+  .p3 { background: linear-gradient(135deg, #e8d3e0, #ddc8d8); }
+  .p4 { background: linear-gradient(135deg, #d3dce8, #c8d4e0); }
+  .p5 { background: linear-gradient(135deg, #e8e8d3, #dde0c8); }
+  .p6 { background: linear-gradient(135deg, #e8d3d3, #e0c8c8); }
+
+  .portfolio-info {
+    padding: 24px 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .portfolio-category {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+  }
+
+  .portfolio-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .portfolio-year {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .portfolio-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 18px;
+    transition: all 0.2s;
+  }
+  .portfolio-item:hover .portfolio-arrow {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+  }
+
+  /* =================== ABOUT =================== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 64px);
+    padding-top: 64px;
+  }
+
+  .about-left {
+    padding: 80px 5% 80px 8%;
+    border-right: 1px solid var(--border);
+  }
+
+  .about-right {
+    padding: 80px 8% 80px 5%;
+  }
+
+  .about-intro-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .about-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .about-bio {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.9;
+    font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .about-skills-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .skill-tag {
+    padding: 7px 16px;
+    border: 1.5px solid var(--border);
+    font-size: 12px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .contact-list { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .contact-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .exp-section { margin-bottom: 48px; }
+  .exp-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--text);
+  }
+
+  .exp-item { margin-bottom: 28px; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .exp-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-left: 16px;
+  }
+  .exp-company {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .skill-bar-group { margin-bottom: 32px; }
+  .skill-bar-item { margin-bottom: 14px; }
+  .skill-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .skill-bar-pct { font-family: var(--font-mono); color: var(--muted); }
+  .skill-bar-track {
+    height: 3px;
+    background: #eee;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--text);
+    transform-origin: left;
+    animation: growBar 1s ease forwards;
+  }
+  @keyframes growBar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* PAGE ANIMATIONS */
+  .page.active .fade-in {
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { opacity: 0; }
+  .d1 { animation-delay: 0.05s !important; }
+  .d2 { animation-delay: 0.15s !important; }
+  .d3 { animation-delay: 0.25s !important; }
+  .d4 { animation-delay: 0.35s !important; }
+  .d5 { animation-delay: 0.45s !important; }
+
+  /* Responsive */
+  /* =============================================
+     RESPONSIVE — Tablet (max 1024px)
+     ============================================= */
+  @media (max-width: 1024px) {
+    nav { padding: 0 4%; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 6% 60px; }
+    .hero-right { height: 280px; }
+    .hero-title { font-size: clamp(36px, 5vw, 56px); }
+
+    .stats-row { padding: 32px 6%; gap: 32px; }
+
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); margin: 0 6% 60px; }
+    .page-header { padding: 100px 6% 48px; }
+    .filter-bar { padding: 24px 6%; }
+
+    .about-grid { grid-template-columns: 1fr; }
+    .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 80px 6% 48px; }
+    .about-right { padding: 48px 6% 80px; }
+
+    .detail-body { grid-template-columns: 1fr 260px; gap: 40px; padding: 48px 6% 80px; }
+    .detail-back-bar { padding: 0 6%; }
+    .detail-gallery { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* =============================================
+     RESPONSIVE — Mobile (max 768px)
+     ============================================= */
+  @media (max-width: 768px) {
+    /* NAV */
+    nav { height: 56px; padding: 0 5%; }
+    .nav-logo { font-size: 15px; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 12px; }
+
+    /* HOME */
+    .hero { grid-template-columns: 1fr; padding-top: 56px; }
+    .hero-left { padding: 52px 5% 48px; }
+    .hero-right { display: none; }
+    .hero-tag { font-size: 10px; margin-bottom: 20px; }
+    .hero-title { font-size: clamp(30px, 8vw, 44px); line-height: 1.2; }
+    .hero-sub { font-size: 13px; margin-bottom: 36px; }
+    .hero-btns { flex-direction: column; gap: 10px; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 13px 24px; font-size: 12px; }
+
+    .stats-row { gap: 16px; flex-wrap: wrap; padding: 28px 5%; justify-content: space-around; }
+    .stat-item { min-width: 80px; }
+    .stat-num { font-size: 28px; }
+    .stat-label { font-size: 11px; }
+
+    /* PORTFOLIO */
+    .page-header { padding: 80px 5% 36px; }
+    .page-header h1 { font-size: clamp(28px, 7vw, 40px); }
+    .page-header p { font-size: 13px; }
+    .filter-bar { padding: 16px 5%; gap: 6px; }
+    .filter-btn { padding: 6px 14px; font-size: 11px; }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); margin: 0 5% 48px; }
+    .portfolio-thumb { aspect-ratio: 1/1; }
+    .portfolio-info { padding: 14px 16px; }
+    .portfolio-category { font-size: 9px; }
+    .portfolio-title { font-size: 13px; }
+    .portfolio-year { font-size: 11px; }
+    .portfolio-arrow { width: 28px; height: 28px; font-size: 14px; }
+
+    /* ABOUT */
+    .about-grid { grid-template-columns: 1fr; padding-top: 56px; }
+    .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 5% 40px; }
+    .about-right { padding: 36px 5% 60px; }
+    .about-intro-tag { font-size: 10px; }
+    .about-name { font-size: clamp(24px, 7vw, 36px); }
+    .about-bio { font-size: 13px; }
+    .skill-tag { font-size: 11px; padding: 5px 12px; }
+    .exp-section-title { font-size: 17px; }
+    .exp-title { font-size: 13px; }
+    .exp-period { font-size: 10px; }
+    .exp-company { font-size: 11px; }
+    .exp-desc { font-size: 12px; }
+    .skill-bar-header { font-size: 11px; }
+
+    /* DETAIL */
+    .detail-back-bar { padding: 0 5%; height: 48px; }
+    .detail-body { grid-template-columns: 1fr; gap: 28px; padding: 28px 5% 60px; }
+    .detail-category { font-size: 10px; }
+    .detail-title { font-size: clamp(22px, 6vw, 34px); }
+    .detail-desc { font-size: 13px; margin-bottom: 32px; padding-bottom: 28px; }
+    .detail-section-title { font-size: 12px; }
+    .detail-text { font-size: 13px; }
+    .detail-list li { font-size: 13px; }
+    .detail-results { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .result-num { font-size: 20px; }
+    .result-label { font-size: 10px; }
+    .detail-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    #detail-gallery-wrap { padding: 20px 5% 0; }
+
+    /* LIGHTBOX */
+    .lb-btn { width: 40px; height: 40px; font-size: 20px; }
+    .lb-btn.prev { left: 8px; }
+    .lb-btn.next { right: 8px; }
+    #lightbox-img { max-width: 95vw; max-height: 85vh; }
+  }
+
+  /* =============================================
+     RESPONSIVE — Small Mobile (max 480px)
+     ============================================= */
+  @media (max-width: 480px) {
+    .portfolio-grid { grid-template-columns: 1fr; margin: 0 5% 40px; }
+    .portfolio-thumb { aspect-ratio: 4/3; }
+    .hero-title { font-size: clamp(26px, 9vw, 36px); }
+    .detail-results { grid-template-columns: repeat(3, 1fr); }
+    .stats-row { gap: 12px; }
+    .stat-num { font-size: 24px; }
+    .filter-bar { gap: 5px; }
+    .filter-btn { padding: 5px 10px; font-size: 10px; }
+    .detail-gallery { grid-template-columns: 1fr; }
+  }
+  .detail-back-bar {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    height: 52px;
+  }
+  .detail-back-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    padding: 0;
+  }
+  .detail-back-btn:hover { color: var(--text); }
+  .detail-nav-btns { display: flex; gap: 8px; }
+  .detail-nav-btn {
+    background: none;
+    border: 1.5px solid var(--border);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px 14px;
+    transition: all 0.2s;
+  }
+  .detail-nav-btn:hover { border-color: var(--text); color: var(--text); }
+  .detail-nav-btn:disabled { opacity: 0.3; pointer-events: none; }
+
+  /* Gallery */
+
+  .detail-body {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 60px;
+    padding: 48px 8% 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .detail-category {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .detail-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .detail-desc {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.9;
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-section { margin-bottom: 40px; }
+  .detail-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-text {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .detail-list li {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+    font-weight: 300;
+    padding-left: 18px;
+    position: relative;
+  }
+  .detail-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  .detail-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .result-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .result-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .result-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .detail-meta-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .detail-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-meta-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .detail-meta-item:first-child { padding-top: 0; }
+  .detail-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  .detail-meta-value {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .detail-tags-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .detail-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .detail-tag {
+    padding: 5px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .detail-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .gallery-card {
+    position: relative;
+    cursor: zoom-in;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #f8f6f3;
+    border-radius: 4px;
+  }
+  .gallery-card img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,26,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+  .gallery-overlay span {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.3s;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+  .gallery-card:hover .gallery-overlay { background: rgba(26,26,26,0.25); }
+  .gallery-card:hover .gallery-overlay span { opacity: 1; transform: translateY(0); }
+  .gallery-card:hover img { transform: scale(1.03); }
+
+  /* Lightbox */
+  #lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox-img {
+    max-width: 88vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    transition: opacity 0.2s;
+  }
+  .lb-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 24px;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    z-index: 10000;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.25); }
+  .lb-btn.prev { left: 20px; }
+  .lb-btn.next { right: 20px; }
+  .lb-close {
+    position: fixed;
+    top: 18px; right: 22px;
+    background: none; border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10000;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .lb-close:hover { color: #fff; }
+  .lb-counter {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-family: var(--font-mono);
+    z-index: 10000;
+  }
+
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" id="nav-logo" href="#" style="cursor:pointer">Portfolio</a>
+  <ul class="nav-links">
+    <li><a class="active" id="nav-home" style="cursor:pointer">Home</a></li>
+    <li><a id="nav-portfolio" style="cursor:pointer">Portfolio</a></li>
+    <li><a id="nav-about" style="cursor:pointer">About</a></li>
+  </ul>
+</nav>
+
+<!-- =================== HOME =================== -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag fade-in d1">Web Designer & E-Commerce MD</p>
+      <h1 class="hero-title fade-in d2">
+        크리에이티브한<br>
+        <span class="line2">디자인으로</span><br>
+        비즈니스를 성장
+      </h1>
+      <p class="hero-sub fade-in d3">
+        웹 디자인의 감각과 MD의 전략으로<br>
+        브랜드의 온라인 경험을 설계합니다.<br>
+        데이터 기반의 상품 기획과 아름다운 시각으로.
+      </p>
+      <div class="hero-btns fade-in d4">
+        <button class="btn-primary" onclick="showPage('portfolio')">포트폴리오 보기</button>
+        <button class="btn-secondary" onclick="showPage('about')">자기소개</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-graphic">
+        <div class="card-float c1">
+          <p class="card-float-label">총 프로젝트</p>
+          <p class="card-float-value">48+</p>
+          <p class="card-float-desc">웹디자인 · 상품기획</p>
+          <div class="dot-bar">
+            <div class="dot active"></div>
+            <div class="dot active"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="card-float c2">
+          <p class="card-float-label">매출 성장률</p>
+          <p class="card-float-value">↑ 230%</p>
+          <p class="card-float-desc">최근 담당 카테고리</p>
+        </div>
+        <div class="card-float c3">
+          <p class="card-float-label">경력</p>
+          <p class="card-float-value">6 Yrs</p>
+          <p class="card-float-desc">실무 디자인 · MD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-row fade-in">
+    <div class="stat-item">
+      <div class="stat-num">48+</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Brands</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6 yr</div>
+      <div class="stat-label">Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">230%</div>
+      <div class="stat-label">Growth Rate</div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PORTFOLIO =================== -->
+<div id="page-portfolio" class="page">
+  <div class="page-header">
+    <p class="page-header-tag fade-in d1">Selected Works</p>
+    <h1 class="fade-in d2">웹디자인 &<br>MD 프로젝트</h1>
+    <p class="fade-in d3">웹 디자인, 상품 기획, 브랜딩까지 다양한 프로젝트들을 소개합니다.</p>
+  </div>
+
+  <div class="filter-bar fade-in d4">
+    <button class="filter-btn active" onclick="filterWork(this,'all')">All</button>
+    <button class="filter-btn" onclick="filterWork(this,'web')">Web Design</button>
+    <button class="filter-btn" onclick="filterWork(this,'md')">MD · 상품기획</button>
+  </div>
+
+  <div class="portfolio-grid fade-in d5" id="portfolio-grid">
+    <div class="portfolio-item" data-cat="md" onclick="openDetail(7)"><div class="portfolio-thumb p2" style="display:flex;align-items:center;justify-content:center"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="15" y="25" width="14" height="30" rx="2" fill="#a8c4b8" fill-opacity="0.5"/><rect x="33" y="18" width="14" height="37" rx="2" fill="#a8c4b8" fill-opacity="0.7"/><rect x="51" y="30" width="14" height="25" rx="2" fill="#a8c4b8"/><line x1="10" y1="55" x2="70" y2="55" stroke="#a8c4b8" stroke-width="1"/><path d="M15 35 Q33 20 51 30" stroke="#6aad99" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/></svg></div><div class="portfolio-info"><div><p class="portfolio-category">MD · 상품기획</p><p class="portfolio-title">뷰티 카테고리<br>매출 전략 기획</p><p class="portfolio-year" style="margin-top:6px">2024</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="md" onclick="openDetail(19)">
+      <div class="portfolio-thumb" style="overflow:hidden;">
+        <img src="Coupang_3.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;">
+      </div>
+      <div class="portfolio-info">
+        <div>
+          <p class="portfolio-category">MD · 상품기획</p>
+          <p class="portfolio-title">준쥬얼리 × 쿠팡<br>시즌 배너 디자인</p>
+          <p class="portfolio-year" style="margin-top:6px">2024</p>
+        </div>
+        <div class="portfolio-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-cat="md" onclick="openDetail(8)"><div class="portfolio-thumb" style="overflow:hidden;background:linear-gradient(135deg,#d3dce8,#c8d4e0);display:flex;align-items:center;justify-content:center"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="12" width="40" height="56" rx="3" fill="#a8bcd4" fill-opacity="0.2" stroke="#a8bcd4" stroke-width="1.2"/><rect x="26" y="20" width="28" height="20" rx="2" fill="#a8bcd4" fill-opacity="0.4"/><rect x="26" y="44" width="28" height="3" rx="1" fill="#a8bcd4" fill-opacity="0.5"/><rect x="26" y="50" width="20" height="3" rx="1" fill="#a8bcd4" fill-opacity="0.3"/><rect x="26" y="56" width="14" height="5" rx="1" fill="#a8bcd4" fill-opacity="0.6"/></svg></div><div class="portfolio-info"><div><p class="portfolio-category">MD · 상품기획</p><p class="portfolio-title">이커머스 상세페이지<br>& 배너 디자인</p><p class="portfolio-year" style="margin-top:6px">2022</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="md" onclick="openDetail(18)"><div class="portfolio-thumb" style="overflow:hidden"><img src="11th_13.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">MD · 상품기획</p><p class="portfolio-title">준쥬얼리 × 11번가<br>시즌 프로모션 이벤트</p><p class="portfolio-year" style="margin-top:6px">2022</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(16)"><div class="portfolio-thumb" style="overflow:hidden"><img src="blissop_details_page.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">이커머스<br>상세페이지 시리즈</p><p class="portfolio-year" style="margin-top:6px">2021</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(14)"><div class="portfolio-thumb" style="overflow:hidden"><img src="sns_event_1.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">사천시청<br>SNS 이벤트 시리즈</p><p class="portfolio-year" style="margin-top:6px">2019</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(0)"><div class="portfolio-thumb" style="overflow:hidden;background:#e8f5f0"><img src="현대백화점_회원_혜택_해피버스데이앱쿠폰_썸네일_400X500_20180418.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점<br>회원 혜택 디자인</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(1)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_birthday_coupon2.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점<br>생일축하쿠폰</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(2)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_check_card_2.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대카드<br>체크카드 이벤트</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(3)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_event_1.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점카드<br>이벤트 시리즈</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(4)"><div class="portfolio-thumb" style="overflow:hidden;background:#0d1b2e"><img src="Hyundai_Motor_Studio1.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점카드<br>Culture Benefit III</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(5)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_Department_Store_x_Eastar_Aviation_Event_Page2.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">EASTAR JET ×<br>THE HYUNDAI</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(6)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Cash_Friends_x_Hyundai_Department_Store2.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">캐시프렌즈 ×<br>현대백화점카드</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(9)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_toomics.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">TOOMICS ×<br>THE HYUNDAI</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(10)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_payco_2.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">PAYCO ×<br>현대오일뱅크카드</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(11)"><div class="portfolio-thumb" style="overflow:hidden;background:#1a2a3a"><img src="Hyundai_mvl_PC.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">THE MVL ×<br>THE HYUNDAI</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(12)"><div class="portfolio-thumb" style="overflow:hidden;background:#2c1a3a"><img src="Hyundai_kmca.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점카드<br>Culture Benefit – KMCA</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(13)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Hyundai_point1.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">현대백화점카드<br>H.Point 이벤트 시리즈</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(15)"><div class="portfolio-thumb" style="overflow:hidden"><img src="golf_wear_sns_event2.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">골프·스포츠 브랜드<br>SNS 이벤트 시리즈</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+    <div class="portfolio-item" data-cat="web" onclick="openDetail(17)"><div class="portfolio-thumb" style="overflow:hidden"><img src="Mako_facedook_lookdook5.png" style="width:100%;height:100%;object-fit:cover;transition:transform .4s"></div><div class="portfolio-info"><div><p class="portfolio-category">Web Design</p><p class="portfolio-title">MACAW 골프웨어<br>Facebook 룩북</p><p class="portfolio-year" style="margin-top:6px">2018</p></div><div class="portfolio-arrow">→</div></div></div>
+
+  </div>
+</div>
+<div id="page-detail" class="page" style="padding-top:64px;">
+  <div class="detail-back-bar">
+    <button class="detail-back-btn" onclick="closeDetail()">← Portfolio로 돌아가기</button>
+    <div class="detail-nav-btns">
+      <button class="detail-nav-btn" id="btn-prev" onclick="navDetail(-1)">← Prev</button>
+      <button class="detail-nav-btn" id="btn-next" onclick="navDetail(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Gallery — 설명보다 먼저 노출 -->
+  <div id="detail-gallery-wrap" style="display:none; padding: 32px 8% 0; max-width:1200px; margin: 52px auto 0;">
+    <div id="detail-gallery" class="detail-gallery"></div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-main">
+      <p class="detail-category" id="detail-category"></p>
+      <h1 class="detail-title" id="detail-title"></h1>
+      <p class="detail-desc" id="detail-desc"></p>
+
+      <div class="detail-section">
+        <h3 class="detail-section-title">프로젝트 개요</h3>
+        <p class="detail-text" id="detail-overview"></p>
+      </div>
+
+      <div class="detail-section">
+        <h3 class="detail-section-title">주요 작업</h3>
+        <ul class="detail-list" id="detail-tasks"></ul>
+      </div>
+
+      <div class="detail-section">
+        <h3 class="detail-section-title">성과</h3>
+        <div class="detail-results" id="detail-results"></div>
+      </div>
+    </div>
+
+    <div class="detail-sidebar">
+      <div class="detail-meta-card">
+        <div class="detail-meta-item">
+          <span class="detail-meta-label">카테고리</span>
+          <span class="detail-meta-value" id="detail-meta-cat"></span>
+        </div>
+        <div class="detail-meta-item">
+          <span class="detail-meta-label">연도</span>
+          <span class="detail-meta-value" id="detail-meta-year"></span>
+        </div>
+        <div class="detail-meta-item">
+          <span class="detail-meta-label">역할</span>
+          <span class="detail-meta-value" id="detail-meta-role"></span>
+        </div>
+        <div class="detail-meta-item">
+          <span class="detail-meta-label">사용 툴</span>
+          <span class="detail-meta-value" id="detail-meta-tools"></span>
+        </div>
+      </div>
+
+      <div class="detail-tags-card">
+        <p class="detail-meta-label" style="margin-bottom:12px">태그</p>
+        <div class="detail-tags" id="detail-tags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img" alt="확대 이미지">
+    <button class="lb-btn prev" onclick="event.stopPropagation(); lbNav(-1)">‹</button>
+    <button class="lb-btn next" onclick="event.stopPropagation(); lbNav(1)">›</button>
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+</div>
+
+<!-- =================== ABOUT =================== -->
+<div id="page-about" class="page">
+  <div class="about-grid">
+    <div class="about-left">
+      <p class="about-intro-tag fade-in d1">About Me</p>
+      <h1 class="about-name fade-in d2">안녕하세요,<br>저는 웹 디자이너<br><span style="font-style:normal;color:var(--accent);font-weight:300;">& E-Commerce MD</span><br>입니다.</h1>
+      <p class="about-bio fade-in d3">
+        디자인과 비즈니스를 함께 이해하는 웹디자이너 겸 이커머스 MD입니다.
+        사용자 경험을 중심으로 한 디자인과 데이터 기반의 상품 기획을 통해
+        브랜드의 가치를 높이고 실질적인 비즈니스 성과를 만들어냅니다.
+      </p>
+
+      <p class="about-skills-title fade-in d4">Design Skills</p>
+      <div class="skill-list fade-in d4">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Illustrator</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">UI/UX</span>
+        <span class="skill-tag">Responsive Web</span>
+      </div>
+
+      <p class="about-skills-title fade-in d4">MD Skills</p>
+      <div class="skill-list fade-in d4">
+        <span class="skill-tag">상품 기획</span>
+        <span class="skill-tag">매입 협상</span>
+        <span class="skill-tag">트렌드 분석</span>
+        <span class="skill-tag">카테고리 운영</span>
+        <span class="skill-tag">GA · 데이터분석</span>
+      </div>
+
+      <p class="about-skills-title fade-in d5">Contact</p>
+      <div class="contact-list fade-in d5">
+        <a class="contact-item" href="mailto:hello@portfolio.kr">
+          <span class="contact-icon">✉</span>
+          hello@portfolio.kr
+        </a>
+        <a class="contact-item" href="#">
+          <span class="contact-icon">in</span>
+          LinkedIn 프로필
+        </a>
+        <a class="contact-item" href="#">
+          <span class="contact-icon">→</span>
+          이력서 다운로드
+        </a>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="exp-section fade-in d2">
+        <h2 class="exp-section-title">Experience</h2>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">(주)준주얼리</span>
+            <span class="exp-period">2019.06 — 2026.04</span>
+          </div>
+          <p class="exp-company">E-commerce MD / Web Designer (과장)</p>
+          <p class="exp-desc">상품등록&관리, 이커머스 채널 프로모션 진행, 매출 및 수수료, 광고 ROAS 통계</p>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">(주)에이치디아이엔씨</span>
+            <span class="exp-period">2018.06 — 2019.03</span>
+          </div>
+          <p class="exp-company">Web Designer (사원)</p>
+          <p class="exp-desc">브랜드 사이트 운영(리뉴얼), 브랜드 SNS 이벤트 페이지/카드뉴스 디자인, 체험단 블로드 관리</p>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">이티엔이티</span>
+            <span class="exp-period">2018.03 — 2018.05</span>
+          </div>
+          <p class="exp-company">Web Designer (사원)</p>
+          <p class="exp-desc">이벤트 페이지, 모바일 및 PC 이벤트 배너 디자인</p>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">올곤은컴퍼니</span>
+            <span class="exp-period">2018.02 — 2018.03</span>
+          </div>
+          <p class="exp-company">Web Designer (사원)</p>
+          <p class="exp-desc">상품 목록이미지, 상품상세페이지, 이벤트 배너 디자인</p>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">이엠씨(EMC)</span>
+            <span class="exp-period">2014.10 — 2015.01</span>
+          </div>
+          <p class="exp-company">예약관리 (사원)</p>
+          <p class="exp-desc">예약관리 및 상담</p>
+        </div>
+      </div>
+
+      <div class="exp-section fade-in d3">
+        <h2 class="exp-section-title">Skill Level</h2>
+        <div class="skill-bar-group">
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span>UI/UX Design</span>
+              <span class="skill-bar-pct">92%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width:92%"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span>MD · 상품기획</span>
+              <span class="skill-bar-pct">88%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width:88%"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span>Figma · Adobe</span>
+              <span class="skill-bar-pct">95%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width:95%"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span>HTML / CSS</span>
+              <span class="skill-bar-pct">75%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width:75%"></div>
+            </div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span>데이터 분석 (GA/엑셀)</span>
+              <span class="skill-bar-pct">80%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script defer>
+const PROJECTS = [
+  { id:0, cat:'Web Design', filterCat:'web', title:'현대백화점\n회원 혜택 디자인', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#e8f5f0', desc:'현대백화점 회원서비스센터의 생일축하쿠폰, 방문 환영 쿠폰 등 회원 혜택 관련 앱쿠폰 썸네일 및 랜딩페이지를 기획하고 디자인했습니다.', overview:'현대백화점 회원 전용 혜택 콘텐츠의 썸네일과 상세 랜딩페이지를 제작했습니다. 브랜드 톤앤매너를 유지하면서 각 쿠폰의 혜택이 한눈에 전달되도록 레이아웃과 비주얼을 설계했습니다.', tasks:['회원 혜택 앱쿠폰 썸네일 디자인 (400x500)','생일축하쿠폰 · 방문환영쿠폰 상세 랜딩페이지 제작','5월 회원 혜택 랜딩페이지 기획 및 디자인','현대백화점 브랜드 가이드라인 준수 작업','PC · 모바일 대응 레이아웃 구성'], results:[{num:'4종',label:'디자인\n산출물'},{num:'앱·웹',label:'채널\n대응'},{num:'2018',label:'제작\n연도'}], tags:['앱쿠폰','랜딩페이지','현대백화점','Photoshop','회원혜택'], gallery:['현대백화점_회원_혜택_해피버스데이앱쿠폰_썸네일_400X500_20180418.jpg','현대백화점_회원_혜택_썸네일.png','현대백화점_회원_혜택_해피버스데이앱쿠폰_상세_20180418.png','현대백화점_회원_혜택_랜딩페이지_5월_.png'] },
+  { id:1, cat:'Web Design', filterCat:'web', title:'현대백화점\n생일축하쿠폰', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#b8e4d8', desc:'현대백화점 회원서비스센터에서 드리는 생일축하쿠폰 이벤트 소재를 기획·제작했습니다.', overview:'케이크와 상품권이 담긴 HAPPY BIRTHDAY 패키지 이미지를 활용해 따뜻하고 축제 분위기의 비주얼을 구성했습니다.', tasks:['생일축하쿠폰 썸네일 이미지 디자인','상세 랜딩페이지 기획 및 풀 디자인','이벤트 기간·조건 안내 섹션 구성','CAFE / CULTURE BENEFIT 혜택 안내','현대백화점카드 5% 할인 혜택 안내'], results:[{num:'2종',label:'소재\n산출물'},{num:'앱·웹',label:'채널\n대응'},{num:'2018',label:'제작\n연도'}], tags:['생일쿠폰','이벤트페이지','현대백화점','회원혜택','Photoshop'], gallery:['Hyundai_birthday_coupon2.jpg','Hyundai_birthday_coupon1.png'] },
+  { id:2, cat:'Web Design', filterCat:'web', title:'현대카드\n체크카드 이벤트', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#f0f8f2', desc:'현대카드 체크카드 출시 기념 이벤트 소재를 제작했습니다. 연회비 무료·1% 혜택을 알리는 배너와 랜딩페이지를 디자인했습니다.', overview:'사전신청자 10만명이 선택한 현대카드 체크카드 런칭 캠페인의 디지털 소재를 제작했습니다.', tasks:['체크카드 소개 정사각형 카드 이미지 제작','가로형 메인 배너 디자인','세로형 이벤트 랜딩페이지 제작','주요혜택 인포그래픽 아이콘 디자인','카드 신청 CTA 버튼 및 흐름 설계'], results:[{num:'3종',label:'소재\n산출물'},{num:'10만+',label:'사전신청자\n달성'},{num:'2018',label:'제작\n연도'}], tags:['체크카드','배너디자인','현대카드','이벤트페이지','Photoshop'], gallery:['Hyundai_check_card_2.png','Hyundai_check_card_1.png','Hyundai_check_card_3.png'] },
+  { id:3, cat:'Web Design', filterCat:'web', title:'현대백화점카드\n이벤트 시리즈', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#fff3cd', desc:'현대백화점카드 신규가입 이벤트, podbbang·World Roaming 콜라보, 현대식품관 혜택 등 4종의 이벤트 랜딩페이지를 기획·제작했습니다.', overview:'신규가입 이벤트, podbbang 콜라보, 현대식품관 제휴혜택, World Roaming 콜라보까지 각 캠페인의 핵심 메시지를 명확하게 시각화했습니다.', tasks:['현대백화점카드 신규가입 이벤트 랜딩페이지','podbbang × THE HYUNDAI 콜라보 랜딩페이지','현대식품관 제휴혜택 이벤트 랜딩페이지','World Roaming × THE HYUNDAI 이벤트 랜딩페이지','이벤트 조건·주요혜택 인포그래픽 섹션 공통 구성'], results:[{num:'4종',label:'랜딩페이지\n제작'},{num:'3사',label:'파트너\n콜라보'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','현대백화점카드','신규가입','podbbang','World Roaming'], gallery:['Hyundai_event_1.png','Hyundai_event_2.jpg','Hyundai_event_3.png','Hyundai_event_4.png'] },
+  { id:4, cat:'Web Design', filterCat:'web', title:'현대백화점카드\nCulture Benefit III', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#0d1b2e', desc:'현대백화점카드 CULTURE BENEFIT III 캠페인 — 현대 모터스튜디오 고양 특별 혜택을 주제로 풀세트 디지털 소재를 기획·제작했습니다.', overview:'다크 톤의 프리미엄 감성을 유지하면서 혜택 정보가 직관적으로 전달되도록 세로형·가로형·미니멀 3가지 방향으로 소재를 분류 제작했습니다.', tasks:['이벤트 랜딩페이지 풀 기획 및 디자인','정사각·직사각 썸네일 멀티 사이즈 제작','가로형 PC 배너 2종 제작','세로형 모바일 배너 및 미니멀 버전 제작','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'5종',label:'소재\n산출물'},{num:'PC·앱',label:'채널\n대응'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','배너디자인','현대백화점카드','Photoshop','Culture Benefit'], gallery:['Hyundai_Motor_Studio1.png','Hyundai_Motor_Studio6.png','Hyundai_Motor_Studio4.png','Hyundai_Motor_Studio5.png','Hyundai_Motor_Studio7.png'] },
+  { id:5, cat:'Web Design', filterCat:'web', title:'EASTAR JET ×\nTHE HYUNDAI', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#f5c518', desc:'이스타항공과 현대백화점카드의 콜라보 프로모션. 카드 발급 시 이스타항공 1만원 쿠폰 100% 증정 이벤트의 랜딩페이지·배너를 기획하고 디자인했습니다.', overview:'경쾌한 노란 배경 컨셉으로 항공권 혜택의 매력을 극대화하고, 카드 신청까지 자연스럽게 유도하는 UX 흐름을 설계했습니다.', tasks:['이벤트 랜딩페이지 풀 디자인','가로형 메인 배너 제작','이벤트 조건·캐시지급 안내 섹션 구성','주요혜택 인포그래픽 아이콘 디자인','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'2종',label:'소재\n산출물'},{num:'콜라보',label:'브랜드\n협업'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','배너디자인','이스타항공','현대백화점카드','콜라보'], gallery:['Hyundai_Department_Store_x_Eastar_Aviation_Event_Page2.png','Hyundai_Department_Store_x_Eastar_Aviation_Event_Page1.png'] },
+  { id:6, cat:'Web Design', filterCat:'web', title:'캐시프렌즈 ×\n현대백화점카드', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#f0c040', desc:'캐시프렌즈 × 현대백화점카드 콜라보 프로모션. 카드 발급 시 10,000 캐시 증정 이벤트의 랜딩페이지와 THE HYUNDAI 카드 이미지를 제작했습니다.', overview:'카드 발급 혜택 안내부터 캐시 지급 조건, 주요혜택 인포그래픽까지 이벤트 전체 흐름을 시각적으로 정리했습니다.', tasks:['이벤트 랜딩페이지 풀 디자인','THE HYUNDAI 카드 이미지 제작','주요혜택 안내 섹션·인포그래픽 구성','카드 신청 CTA 버튼 및 레이아웃 기획','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'2종',label:'소재\n산출물'},{num:'10,000',label:'캐시 증정\n이벤트'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','카드이미지','캐시프렌즈','현대백화점카드','Photoshop'], gallery:['Cash_Friends_x_Hyundai_Department_Store2.png','Cash_Friends_x_Hyundai_Department_Store1.png'] },
+  { id:7, cat:'MD · 상품기획', filterCat:'md', title:'뷰티 카테고리\n매출 전략 기획', year:'2024', role:'E-commerce MD · (주)준주얼리', tools:'Excel, Google Analytics, 채널톡', thumbBg:'linear-gradient(135deg,#d3e8e0,#c8e0d8)', desc:'스킨케어·메이크업 카테고리의 데이터 분석을 기반으로 시즌별 상품 전략을 수립하고, 기획전 운영부터 광고 집행까지 풀 사이클을 담당한 프로젝트입니다.', overview:'카테고리 전반의 판매 데이터와 고객 리뷰를 분석해 핵심 상품군을 재편하고, 시즌 트렌드에 맞는 기획전 캘린더를 설계했습니다.', tasks:['카테고리 매출 데이터 분석 및 리포트 작성','시즌 기획전 콘셉트 기획 및 상품 큐레이션','신규 브랜드 소싱 및 매입 협상','네이버·카카오 광고 ROAS 모니터링 및 최적화','상품 등록·상세페이지 기획 방향 수립'], results:[{num:'+230%',label:'카테고리\n매출 성장'},{num:'4.2x',label:'ROAS\n달성'},{num:'50+',label:'신규 브랜드\n입점'}], tags:['상품기획','데이터분석','ROAS','기획전','뷰티MD'] },
+  { id:8, cat:'MD · 상품기획', filterCat:'md', title:'이커머스 상세페이지\n& 배너 디자인', year:'2022', role:'E-commerce MD / Web Designer · (주)준주얼리', tools:'Photoshop, Illustrator, Figma', thumbBg:'linear-gradient(135deg,#d3dce8,#c8d4e0)', desc:'주얼리 브랜드의 이커머스 채널을 위한 상품 상세페이지 및 프로모션 배너를 다수 제작했습니다.', overview:'각 채널의 상품 노출 기준과 고객 구매 패턴을 분석해 클릭률을 높이는 썸네일·상세페이지 구성을 설계했습니다.', tasks:['스마트스토어 상품 상세페이지 100+ 제작','시즌 기획전 메인 배너·서브 배너 디자인','카카오쇼핑/쿠팡 채널 최적화 이미지 제작','GIF 움짤 배너 및 동영상 썸네일 제작','A/B 테스트를 통한 CTR 최적화'], results:[{num:'100+',label:'상세페이지\n제작'},{num:'+38%',label:'CTR\n향상'},{num:'3채널',label:'멀티채널\n대응'}], tags:['상세페이지','배너디자인','스마트스토어','이커머스','Photoshop'] },
+  { id:9, cat:'Web Design', filterCat:'web', title:'TOOMICS ×\nTHE HYUNDAI', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#e8f5e0', desc:'투믹스와 현대백화점카드의 콜라보 이벤트. 카드 발급 시 투믹스 25코인 증정 혜택을 알리는 이벤트 랜딩페이지를 기획·제작했습니다.', overview:'웹툰 플랫폼 투믹스와 현대백화점카드의 협업 프로모션 소재를 제작했습니다. 카드 신청까지 자연스럽게 유도하는 UX 흐름을 설계했습니다.', tasks:['이벤트 랜딩페이지 풀 기획 및 디자인','투믹스 × HYUNDAI 콜라보 비주얼 방향 설정','이벤트 조건·쿠폰지급 안내 섹션 구성','주요혜택 인포그래픽 아이콘 디자인','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'1종',label:'소재\n산출물'},{num:'콜라보',label:'브랜드\n협업'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','투믹스','현대백화점카드','콜라보','Photoshop'], gallery:['Hyundai_toomics.png'] },
+  { id:10, cat:'Web Design', filterCat:'web', title:'PAYCO ×\n현대오일뱅크카드', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#e8f8e8', desc:'PAYCO와 현대오일뱅크카드 신규가입 이벤트 소재를 제작했습니다. 카드 발급 시 페이코 포인트 1만 점 100% 증정 혜택을 배너와 썸네일로 표현했습니다.', overview:'봄 시즌 감성에 맞는 밝고 경쾌한 디자인으로 카드 혜택을 직관적으로 전달하고, 다양한 채널에 대응하는 사이즈별 소재를 제작했습니다.', tasks:['가로형 메인 이벤트 배너 제작','정사각형 썸네일 이미지 제작','PAYCO × 현대오일뱅크카드 콜라보 비주얼 설계','포인트 1만점 증정 혜택 핵심 메시지 시각화','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'2종',label:'소재\n산출물'},{num:'콜라보',label:'브랜드\n협업'},{num:'2018',label:'제작\n연도'}], tags:['배너디자인','PAYCO','현대오일뱅크카드','콜라보','Photoshop'], gallery:['Hyundai_payco_2.png','Hyundai_payco_1.png'] },
+  { id:11, cat:'Web Design', filterCat:'web', title:'THE MVL ×\nTHE HYUNDAI', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#1a2a3a', desc:'THE MVL 호텔과 현대백화점카드의 콜라보 프로모션. 카드 발급 시 쿠치나M 1만원 할인쿠폰 증정 이벤트의 랜딩페이지를 기획·제작했습니다.', overview:'고급스러운 호텔 분위기를 살린 다크 톤 디자인으로 브랜드 가치를 표현하고, 할인쿠폰 증정 혜택 정보를 명확하게 전달했습니다.', tasks:['이벤트 랜딩페이지 풀 기획 및 디자인','쿠치나M 레스토랑 비주얼 방향 설정','이벤트 조건·쿠폰지급 안내 섹션 구성','주요혜택 인포그래픽 아이콘 디자인','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'1종',label:'소재\n산출물'},{num:'콜라보',label:'브랜드\n협업'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','THE MVL','현대백화점카드','콜라보','Photoshop'], gallery:['Hyundai_mvl_PC.png'] },
+  { id:12, cat:'Web Design', filterCat:'web', title:'현대백화점카드\nCulture Benefit – KMCA', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#2c1a3a', desc:'현대백화점카드 CULTURE BENEFIT 캠페인 — K현대미술관 특별전시 이벤트 소재를 기획·제작했습니다.', overview:'전시의 예술적 감성을 살린 비주얼로 현대백화점카드 30% 할인 혜택을 전달했습니다.', tasks:['CULTURE BENEFIT 이벤트 랜딩페이지 풀 디자인','KMCA 특별전시 비주얼 구성','카드혜택 안내 섹션 구성','KMCA 브랜드 아이덴티티 반영 레이아웃 설계','현대백화점카드 브랜드 가이드라인 적용'], results:[{num:'1종',label:'소재\n산출물'},{num:'30%',label:'전시 할인\n혜택'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','KMCA','현대백화점카드','Culture Benefit','Photoshop'], gallery:['Hyundai_kmca.png'] },
+  { id:13, cat:'Web Design', filterCat:'web', title:'현대백화점카드\nH.Point 이벤트 시리즈', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#e8f5e0', desc:'현대백화점카드 신규 발급 H.Point 1만점 증정 이벤트 시리즈. 봄 시즌·설날·OK캐시백 연계 등 시즌별 4종을 제작했습니다.', overview:'봄 시즌(캠핑 테마), 설날(개 캐릭터), OK캐시백 연계, H.Point 단독 이벤트 등 각 캠페인의 콘셉트에 맞는 비주얼을 개발했습니다.', tasks:['봄 시즌 이벤트 랜딩페이지 (캠핑 테마)','OK캐시백 1만 포인트 이벤트 랜딩페이지','설날 이벤트 랜딩페이지 (2018.2.1~2.28)','H.Point 1만점 증정 단독 이벤트 소재','각 시즌별 혜택 조건 및 인포그래픽 섹션 구성'], results:[{num:'4종',label:'시리즈\n소재'},{num:'시즌별',label:'비주얼\n차별화'},{num:'2018',label:'제작\n연도'}], tags:['이벤트페이지','H.Point','현대백화점카드','OK캐시백','Photoshop'], gallery:['Hyundai_point1.png','Hyundai_point2.png','Hyundai_point3.png','Hyundai_h.point2.png'] },
+  { id:14, cat:'Web Design', filterCat:'web', title:'사천시청\nSNS 이벤트 시리즈', year:'2019', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#d0ecf8', desc:'사천시청 공식 SNS 채널의 이벤트 카드뉴스를 기획·제작했습니다. 퀴즈·여행코스 추천·봄 추억 등 시즌별 3종 시리즈입니다.', overview:'시민 참여를 유도하는 퀴즈·댓글 이벤트 형식으로 기획하고, 참여 방법과 경품 정보를 인포그래픽으로 정리해 정보 전달력을 높였습니다.', tasks:['1월 퀴즈 이벤트 카드뉴스 (스타벅스 80명)','1월 사천여행 코스 추천 이벤트 (신세계 상품권 50명)','3월 봄 추억 나눠요 댓글 이벤트 (파리바게뜨 40명)','참여 방법 인포그래픽 (SNS 4채널 공통)','사천시 브랜드 가이드라인 반영 비주얼 설계'], results:[{num:'3종',label:'시리즈\n카드뉴스'},{num:'4채널',label:'SNS\n대응'},{num:'2019',label:'제작\n연도'}], tags:['카드뉴스','SNS이벤트','사천시청','인포그래픽','Photoshop'], gallery:['sns_event_1.jpg','sns_event_2.jpg','sns_event_3.jpg','sns_event_4.jpg'] },
+  { id:15, cat:'Web Design', filterCat:'web', title:'골프·스포츠 브랜드\nSNS 이벤트 시리즈', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#fce8e8', desc:'MACAW·ALLFORYOU·HANSUNG F-I 등 골프·스포츠 브랜드의 SNS 이벤트 카드뉴스 5종을 기획·제작했습니다.', overview:'각 브랜드의 톤앤매너에 맞춘 비주얼과 참여 유도 인포그래픽을 통해 팬덤과의 소통을 강화했습니다.', tasks:['MACAW 마코 골프웨어 한가위 릴레이 이벤트','MACAW 한가위 이벤트 배너 및 카드뉴스','MACAW GOLF SPORTS 빈칸맞히기 이벤트','ALLFORYOU 올포유 OPEN 인스타그램 이벤트','HANSUNG F-I 동호회 릴레이 이벤트'], results:[{num:'5종',label:'이벤트\n소재'},{num:'3사',label:'브랜드\n담당'},{num:'2018',label:'제작\n연도'}], tags:['카드뉴스','SNS이벤트','MACAW','ALLFORYOU','골프웨어'], gallery:['golf_wear_sns_event2.png','golf_wear_sns_event3.jpg','golf_wear_sns_event1.png','golf_wear_sns_event4.png'] },
+  { id:16, cat:'Web Design', filterCat:'web', title:'이커머스\n상세페이지 시리즈', year:'2021', role:'E-commerce MD / Web Designer · (주)준주얼리', tools:'Photoshop, Illustrator, Figma', thumbBg:'#f5f0ea', desc:'스마트스토어 입점 상품의 이커머스 상세페이지를 제작했습니다.', overview:'두 상품의 타깃 고객과 구매 결정 포인트를 분석해 상품 신뢰도를 높이는 상세페이지를 설계했습니다.', tasks:['ELLARISA 프리미엄 슬리밍 쉐이퍼 상세페이지 풀 제작','블리솝 어성초 한방비누 상세페이지 풀 제작','제품 특장점 인포그래픽 및 Step 이미지 구성','Detail Cut 촬영 이미지 편집 및 배치','스마트스토어 최적 사이즈 및 포맷 적용'], results:[{num:'2종',label:'상세페이지\n제작'},{num:'풀세트',label:'기획부터\n완성까지'},{num:'2021',label:'제작\n연도'}], tags:['상세페이지','이커머스','스마트스토어','Photoshop','뷰티·건강'], gallery:['blissop_details_page.jpg','sleep_stocking_details_page.jpg'] },
+  { id:17, cat:'Web Design', filterCat:'web', title:'MACAW 골프웨어\nFacebook 룩북', year:'2018', role:'Web Designer · (주)에이치디아이엔씨', tools:'Photoshop, Illustrator', thumbBg:'#f5e8e8', desc:'MACAW 골프웨어 브랜드의 Facebook 공식 채널 룩북 카드뉴스를 기획·제작했습니다. 시즌 컬렉션 스타일링을 소개하는 5종 시리즈입니다.', overview:'세련된 레이아웃과 카피라이팅으로 제품의 스타일과 특장점을 직관적으로 전달했습니다.', tasks:['VEST PADDING STYLING 룩북 카드뉴스','GOOSE DOWN 룩북 카드뉴스','COLOURFUL CASUAL 룩북 카드뉴스','FUR ELEGANT 룩북 카드뉴스','THE END OF THE YEAR LOOK 시즌 룩북'], results:[{num:'5종',label:'룩북\n카드뉴스'},{num:'FB',label:'Facebook\n채널'},{num:'2018',label:'제작\n연도'}], tags:['룩북','카드뉴스','MACAW','골프웨어','Photoshop'], gallery:['Mako_facedook_lookdook5.png','Mako_facedook_lookdook6.png','Mako_facedook_lookdook3.jpeg','Mako_facedook_lookdook1.png','Mako_facedook_lookdook7.png'] },
+  { id:18, cat:'MD · 상품기획', filterCat:'md', title:'준쥬얼리 × 11번가\n시즌 프로모션 이벤트', year:'2022', role:'E-commerce MD / Web Designer · (주)준주얼리', tools:'Photoshop, Illustrator', thumbBg:'#1a2050', desc:'준쥬얼리 × 11번가 채널에서 진행한 시즌별 프로모션 이벤트 페이지 11종을 기획·제작했습니다.', overview:'11번가 채널 전용 이벤트 기획전 페이지를 시즌별로 기획하고 디자인했습니다.', tasks:['봄꽃할인 쿠폰 이벤트 (03.15~03.31, 30% 쿠폰)', 'Spring Sale 이벤트 (04.11~04.17, 30% 할인쿠폰)', '가정의달 Family Month Event (5월, 7% 추가쿠폰)', 'Thank you 어버이날 이벤트 (05.01~05.11, 30% 쿠폰)', '얼리썸머 이벤트 (05.27~06.12, 30% 쿠폰)', '쇼핑페스티벌 × 11번가 (06.01~06.10, 15%×2 쿠폰)', '썸머타임 이벤트 (06.20~06.30, 30% 쿠폰)', 'HOT SUMMER 30% SALE × 11번가 (07.12~07.17)', 'HOT SUMMER 30% SALE × 11번가 2차 (08.01~08.07)', '한가위 보름달 이벤트 × 11번가 (08.22~09.05, 15%×2)', '크리스마스 득템할인 이벤트 (12.01~12.31, 5000원 즉시할인)'], results:[{num:'11종',label:'시즌별\n이벤트'},{num:'연간',label:'프로모션\n캘린더 운영'},{num:'2022',label:'제작\n연도'}], tags:['이벤트페이지','11번가','시즌프로모션','준쥬얼리','Photoshop'], gallery:['11th_6.jpg','11th_8.jpg','11th_3.jpg','11th_4.jpg','11th_5.jpg','11th_10.jpg','11th_11.jpg','11th_13.jpg','11th_14.jpg','11th.jpg','11th_15.jpg'] },
+  { id:19, cat:'MD · 상품기획', filterCat:'md', title:'준쥬얼리 × 쿠팡\n시즌 배너 디자인', year:'2024', role:'E-commerce MD / Web Designer · (주)준주얼리', tools:'Photoshop, Illustrator', thumbBg:'#3b1f6e', desc:'쿠팡 채널에서 진행한 시즌별 프로모션 배너를 기획·제작했습니다. Summer Event, Goodbye Summer Sale, Autumn 할인쿠폰, EVENT 쿠폰 혜택, 블랙프라이데이까지 연간 7종의 시즌 배너 시리즈입니다.', overview:'쿠팡 채널 전용 이벤트 배너를 시즌별 컨셉에 맞게 기획하고 디자인했습니다. 가로형·정사각형 등 채널 규격에 맞는 멀티 사이즈로 제작했으며, 각 시즌의 감성과 할인 혜택을 직관적으로 전달하는 비주얼을 설계했습니다.', tasks:['2024 Summer Event 배너 (가로형·정사각형, 08.05~08.16, 최대 67% 세일)','Summer Event 가로 배너 (08.06~08.19)','Goodbye Summer Sale 배너 (가로형·세로형, 8/20~9/2, 최대 47% 할인)','Autumn 할인쿠폰 배너 (09.02~09.19, 최대 40~55% OFF, 4% 쿠폰)','EVENT 쿠폰 혜택 배너 (10/2~10/30, 4%+3% 쿠폰, 최대 55%)','11 블랙 FRIDAY 배너 (11.11~11.25, 최대 47% 할인, 3% 쿠폰)','각 배너 가로·정사각 멀티 사이즈 대응'], results:[{num:'7종',label:'시즌 배너\n제작'},{num:'멀티',label:'사이즈\n대응'},{num:'2024',label:'제작\n연도'}], tags:['배너디자인','쿠팡','시즌프로모션','준쥬얼리','Photoshop'], gallery:['Coupang_3.jpg','Coupang_4.jpg','Coupang_5.jpg','Coupang_6.jpg','Coupang_7.jpg','Coupang_8.jpg','Coupang_10.jpg'] },
+];
+
+const THUMB_SVGS = [];
+const THUMB_BG_CLASSES = [];
+const THUMB_BG_STYLES = [];
+
+
+let currentDetailIdx = 0;
+let lbImages = [];
+let lbIdx = 0;
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+window.showPage = showPage;
+
+function openDetail(idx) {
+  currentDetailIdx = idx;
+  renderDetail(idx);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+  document.getElementById('nav-portfolio').classList.add('active');
+  window.scrollTo(0, 0);
+}
+window.openDetail = openDetail;
+
+function closeDetail() {
+  showPage('portfolio');
+}
+window.closeDetail = closeDetail;
+
+function navDetail(dir) {
+  const next = currentDetailIdx + dir;
+  if (next >= 0 && next < PROJECTS.length) openDetail(next);
+}
+window.navDetail = navDetail;
+
+function filterWork(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+window.filterWork = filterWork;
+
+// hero 배경: gallery 없으면 thumbBg, 있으면 첫 이미지
+function renderDetail(idx) {
+  const p = PROJECTS[idx];
+  document.getElementById('detail-category').textContent = p.cat;
+  document.getElementById('detail-title').innerHTML = p.title.replace('\n', '<br>');
+  document.getElementById('detail-desc').textContent = p.desc;
+  document.getElementById('detail-overview').textContent = p.overview;
+  document.getElementById('detail-tasks').innerHTML = p.tasks.map(t => `<li>${t}</li>`).join('');
+  document.getElementById('detail-results').innerHTML = p.results.map(r =>
+    `<div class="result-card"><div class="result-num">${r.num}</div><div class="result-label">${r.label.replace('\n','<br>')}</div></div>`
+  ).join('');
+  document.getElementById('detail-meta-cat').textContent = p.cat;
+  document.getElementById('detail-meta-year').textContent = p.year;
+  document.getElementById('detail-meta-role').textContent = p.role;
+  document.getElementById('detail-meta-tools').textContent = p.tools;
+  document.getElementById('detail-tags').innerHTML = p.tags.map(t => `<span class="detail-tag">${t}</span>`).join('');
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === PROJECTS.length - 1;
+  const galleryWrap = document.getElementById('detail-gallery-wrap');
+  const gallery = document.getElementById('detail-gallery');
+  if (p.gallery && p.gallery.length > 0) {
+    lbImages = p.gallery;
+    gallery.innerHTML = p.gallery.map((src, i) =>
+      `<div class="gallery-card" onclick="openLightbox(${i})">
+        <img src="${src}" loading="lazy" alt="작업 이미지 ${i+1}">
+        <div class="gallery-overlay"><span>🔍 확대보기</span></div>
+      </div>`
+    ).join('');
+    galleryWrap.style.display = 'block';
+  } else {
+    galleryWrap.style.display = 'none';
+  }
+}
+
+function openLightbox(i) {
+  lbIdx = i;
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = lbImages[i];
+  document.getElementById('lb-counter').textContent = `${i + 1} / ${lbImages.length}`;
+  lb.classList.add('open');
+}
+window.openLightbox = openLightbox;
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+window.closeLightbox = closeLightbox;
+
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
+  document.getElementById('lightbox-img').src = lbImages[lbIdx];
+  document.getElementById('lb-counter').textContent = `${lbIdx + 1} / ${lbImages.length}`;
+}
+window.lbNav = lbNav;
+
+// 키보드 지원
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'Escape') closeLightbox();
+});
+// 배경 클릭 닫기
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this || e.target === document.getElementById('lightbox-img')) closeLightbox();
+  });
+});
+
+// nav 클릭 안전 바인딩 (DOM 로드 후)
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('nav-logo').addEventListener('click', function(e) { e.preventDefault(); showPage('home'); });
+  document.getElementById('nav-home').addEventListener('click', function() { showPage('home'); });
+  document.getElementById('nav-portfolio').addEventListener('click', function() { showPage('portfolio'); });
+  document.getElementById('nav-about').addEventListener('click', function() { showPage('about'); });
+});
+</script>
+</body>
+</html>
